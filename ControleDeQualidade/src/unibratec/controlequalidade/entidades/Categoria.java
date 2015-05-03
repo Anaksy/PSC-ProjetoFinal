@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Categoria {
-// Teste Pedro
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idCategoria;
