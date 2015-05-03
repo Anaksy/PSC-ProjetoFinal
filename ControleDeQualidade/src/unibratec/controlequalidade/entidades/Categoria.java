@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Categoria {
-//Teste bilola de wilkie
+//Teste Wilkie
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idCategoria;
