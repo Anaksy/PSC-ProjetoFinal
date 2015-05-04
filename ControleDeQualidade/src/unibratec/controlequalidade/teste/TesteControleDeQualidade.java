@@ -62,7 +62,7 @@ public class TesteControleDeQualidade {
 			nc.inserirCategoria(c1);
 			
 		} catch (CategoriaCadastradaException e) {
-		
+
 			System.out.println(e.getMessage());
 		}
 		

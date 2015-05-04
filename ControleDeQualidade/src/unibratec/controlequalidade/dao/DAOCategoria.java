@@ -25,7 +25,7 @@ IDAOCategoria {
 	 * @return true/false
 	 */
 	@Override
-	public boolean consultarCategoriaExistente(String nome) throws NoResultException{
+	public boolean consultarCategoriaExistente(String nome) {
 
 		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME, this.classePersistente);
 		query.setParameter("nome", "%" + nome + "%");
@@ -33,12 +33,10 @@ IDAOCategoria {
 		try {
 			if (!query.setMaxResults(1).getSingleResult().equals(null)) {
 
-				//System.out.println("Categoria ENCONTRADA");
 				return true;
 
 			}else {
 
-				System.out.println("Categoria NÃO ENCONTRADA");
 				return false;
 			}
 

@@ -22,18 +22,14 @@ public class NegocioCategoria {
 
 			if (daoCategoria.consultarCategoriaExistente(categoria.getNomeCategoria()) == true) {
 				
-				throw new CategoriaCadastradaException("ROLA NO CU DE PEDRO");
+				throw new CategoriaCadastradaException("Categoria já cadastrada no sistema.");
 			}
 
 		} catch (NoResultException e) {
 
 			daoCategoria.inserir(categoria);
 
-		} catch (CategoriaCadastradaException e) {
-
-			throw new CategoriaCadastradaException(e.getMessage());
-			
-		} 
+		}
 
 	}
 }
