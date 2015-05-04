@@ -1,9 +1,12 @@
 package unibratec.controlequalidade.teste;
 
 import java.util.Calendar;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+
 import unibratec.controlequalidade.dao.DAOCategoria;
 import unibratec.controlequalidade.dao.DAOLote;
 import unibratec.controlequalidade.dao.DAOProduto;
@@ -11,6 +14,8 @@ import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
+import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
+import unibratec.controlequalidade.negocio.NegocioCategoria;
 
 public class TesteControleDeQualidade {
 
@@ -22,8 +27,11 @@ public class TesteControleDeQualidade {
 
 		//############# CATEGORIA #############
 		Categoria c0 = new Categoria("laticínios", 15);
-		System.out.println(c0);
+		Categoria c1 = new Categoria("Pedro", 30);
+		//System.out.println(c0);
 
+
+		/*
 		DAOCategoria daoCategoria= new DAOCategoria(etManager);
 		daoCategoria.inserir(c0);
 		//############# CATEGORIA #############
@@ -45,6 +53,19 @@ public class TesteControleDeQualidade {
 		DAOProduto daoProduto = new DAOProduto(etManager);
 		daoProduto.inserir(p0);
 		//############# PRODUTO #############
+		 */
+
+		NegocioCategoria nc = new NegocioCategoria(etManager);
+
+		try {
+			
+			nc.inserirCategoria(c1);
+			
+		} catch (CategoriaCadastradaException e) {
+		
+			System.out.println(e.getMessage());
+		}
+		
 
 	}
 
