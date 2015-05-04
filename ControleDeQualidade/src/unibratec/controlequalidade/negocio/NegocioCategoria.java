@@ -1,7 +1,6 @@
 package unibratec.controlequalidade.negocio;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 import unibratec.controlequalidade.dao.DAOCategoria;
 import unibratec.controlequalidade.dao.IDAOCategoria;
@@ -16,20 +15,24 @@ public class NegocioCategoria {
 		this.daoCategoria = new DAOCategoria(em);
 	}
 
-	public void inserirCategoria(Categoria categoria) throws CategoriaCadastradaException { 
+	public void inserirCategoria(Categoria categoria) { 
 
 		try {
 
 			if (daoCategoria.consultarCategoriaExistente(categoria.getNomeCategoria()) == true) {
 				
 				throw new CategoriaCadastradaException("Categoria já cadastrada no sistema.");
+			
+			} else {
+				
+				daoCategoria.inserir(categoria);
 			}
+			
+		} catch (CategoriaCadastradaException e) {
 
-		} catch (NoResultException e) {
-
-			daoCategoria.inserir(categoria);
+			e.printStackTrace();
+			System.out.println(e.getMessage());
 
 		}
-
 	}
 }

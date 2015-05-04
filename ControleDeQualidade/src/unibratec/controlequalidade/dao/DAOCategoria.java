@@ -7,7 +7,7 @@ import javax.persistence.TypedQuery;
 import unibratec.controlequalidade.entidades.Categoria;
 
 public class DAOCategoria extends DAOGenerico<Categoria> implements
-IDAOCategoria {
+		IDAOCategoria {
 
 	protected String NAMED_QUERY_BYNOME = "Categoria.findByNome";
 
@@ -15,36 +15,36 @@ IDAOCategoria {
 		super(em);
 	}
 
-
-
 	/**
 	 * Verifica a existencia de uma categoria no banco de dados
 	 * 
-	 * @param Nome da Categoria
-	 *  
+	 * @param Nome
+	 *            da Categoria
+	 * 
 	 * @return true/false
 	 */
 	@Override
 	public boolean consultarCategoriaExistente(String nome) {
 
-		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME, this.classePersistente);
+		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(
+				NAMED_QUERY_BYNOME, this.classePersistente);
 		query.setParameter("nome", "%" + nome + "%");
 
 		try {
 			if (!query.setMaxResults(1).getSingleResult().equals(null)) {
 
 				return true;
-
-			}else {
-
-				return false;
 			}
-
+			
 		} catch (NoResultException e) {
 			e.printStackTrace();
-			throw new NoResultException(e.getMessage());
+			e.getMessage();
+			
+			return false;
+			//throw new NoResultException(e.getMessage());
 		}
 
+		return false;
 	}
 
 }
