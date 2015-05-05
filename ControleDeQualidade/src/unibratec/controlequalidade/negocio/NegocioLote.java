@@ -20,22 +20,19 @@ public class NegocioLote {
 	// que garante um nome único, porém caso mesmo assim um mesmo nome já se
 	// encontre cadastrado na base de dados, uma exceção será levantada.
 
-	public void gerarLote(Lote lote) throws ContateOAdministradorException {
+	public void gerarLote(Lote lote) {
 
 		try {
-			if (daoLote.consultarLoteExistente(lote.getNomeLote()) == true) {
-	
-				throw new LoteCadastradoException("Lote já cadastrada no sistema.");
+			daoLote.consultarLoteExistente(lote.getNomeLote()); 
+			daoLote.inserir(lote);
 
-			} else {
-				daoLote.inserir(lote);
-			}
-
-		} catch (LoteCadastradoException e) {
+		} 
+		catch (LoteCadastradoException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 			lote.setNomeLote();
 			System.out.println("Alterando nome do lote para inserção na base de dados.");
+			daoLote.inserir(lote);
 		}
 	}
 

@@ -26,24 +26,23 @@ public class TesteControleDeQualidade {
 		//############# ENTITY MANAGER #############
 
 		//############# CATEGORIA #############
-//		Categoria c0 = new Categoria("laticínios", 15);
+//		Categoria c0 = new Categoria("teste", 15);
 //		System.out.println(c0);
 //
 //		NegocioCategoria negocioCategoria = new NegocioCategoria(etManager);
 //		negocioCategoria.inserirCategoria(c0);
-		DAOCategoria daoCategoria= new DAOCategoria(etManager);
+//		DAOCategoria daoCategoria= new DAOCategoria(etManager);
 //		daoCategoria.inserir(c0);
-		daoCategoria.excluir(2l);
 //		//############# CATEGORIA #############
 //
 //		//############# LOTE #############
 //		Calendar cl0 = Calendar.getInstance();
 //		cl0.set(2018, 12, 10);
-//		Lote l0 = new Lote();
+		Lote l0 = new Lote();
 //		System.out.println(l0);
 //
-//		NegocioLote negocioLote = new NegocioLote(etManager);
-//		negocioLote.gerarLote(l0);
+		NegocioLote negocioLote = new NegocioLote(etManager);
+		negocioLote.gerarLote(l0);
 //		DAOLote daoLote = new DAOLote(etManager);
 //		daoLote.inserir(l0);
 		//############# LOTE #############

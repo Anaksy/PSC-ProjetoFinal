@@ -19,20 +19,37 @@ public class NegocioCategoria {
 
 		try {
 
-			if (daoCategoria.consultarCategoriaExistente(categoria.getNomeCategoria()) == true) {
-				
-				throw new CategoriaCadastradaException("Categoria já cadastrada no sistema.");
-			
-			} else {
-				
-				daoCategoria.inserir(categoria);
-			}
-			
+			daoCategoria.consultaExisteCategoria(categoria.getNomeCategoria());
+
+			daoCategoria.inserir(categoria);
+
 		} catch (CategoriaCadastradaException e) {
 
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 
 		}
+
+
+
+
+
+		//		try {
+			//
+			//			if (daoCategoria.consultarCategoriaExistente(categoria.getNomeCategoria()) == true) {
+		//				
+		//				throw new CategoriaCadastradaException("Categoria já cadastrada no sistema.");
+		//			
+		//			} else {
+		//				
+		//				daoCategoria.inserir(categoria);
+		//			}
+		//			
+		//		} catch (CategoriaCadastradaException e) {
+		//
+		//			e.printStackTrace();
+		//			System.out.println(e.getMessage());
+		//
+		//		}
 	}
 }
