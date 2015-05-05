@@ -15,7 +15,7 @@ public class NegocioLote {
 		this.daoLote = new DAOLote(em);
 	}
 
-	public void inserirLote(Lote lote) { 
+	public void gerarLote(Lote lote) { 
 
 		try {
 

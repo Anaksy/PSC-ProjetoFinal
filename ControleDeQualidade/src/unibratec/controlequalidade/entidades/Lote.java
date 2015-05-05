@@ -1,7 +1,7 @@
 package unibratec.controlequalidade.entidades;
 
 import java.util.Calendar;
-
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,23 +26,27 @@ public class Lote {
 	private String nomeLote;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DATA_DE_VALIDADE_LOTE", nullable = false)
+	@Column(name = "DATA_DE_VALIDADE_LOTE", nullable = true)
 	private Calendar dataDeValidade;
 
+	@Column(name = "QTD_PRODUTOS_LOTE", nullable = true)
+	private int qtdProdutos;
+
 	public Lote() {
+		this.setNomeLote();
 	}
 
-	public Lote(String nome, Calendar dataDeValidade) {
-		this.setNomeLote(nome);
-		this.setDataDeValidade(dataDeValidade);
-	}
+//	public Lote(Calendar dataDeValidade) {
+//		this.setNomeLote();
+//		this.setDataDeValidade(dataDeValidade);
+//	}
 
 	public String getNomeLote() {
 		return nomeLote;
 	}
 
-	public void setNomeLote(String nomeLote) {
-		this.nomeLote = nomeLote;
+	public void setNomeLote() {
+		this.nomeLote = geraNomeLote();
 	}
 
 	public Calendar getDataDeValidade() {
@@ -53,6 +57,33 @@ public class Lote {
 		// Formatação da data fica a cargo da regra de negocio.
 		this.dataDeValidade = dataDeValidade;
 	}
+
+	public int getQtdProdutos() {
+		return qtdProdutos;
+	}
+
+	public void setQtdProdutos(int qtdProdutos) {
+		this.qtdProdutos = qtdProdutos;
+	}
+
+	//Método que gera o nome do lote.
+	@SuppressWarnings("static-access")
+	private String geraNomeLote(){
+		String nomeLote = null;
+		Date d = new Date();
+		Calendar c = Calendar.getInstance();
+		c.setTime(d);
+		nomeLote = "LT" + c.get(c.YEAR) +  getNomeMesDeInt(c.get(c.MONTH)) + c.get(c.DAY_OF_MONTH) + 
+				"-" + "T" + c.get(c.HOUR) + c.get(c.MINUTE) +  String.valueOf(c.getTimeInMillis()).substring(8);
+		return nomeLote; 		
+	}
+
+	//Método que "traduz" o número do mês na abreviação do mesmo.
+	private String getNomeMesDeInt(int mes){
+		String[] meses = {"JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEC"};
+		return meses[mes];
+	}
+
 
 	@Override
 	public int hashCode() {
