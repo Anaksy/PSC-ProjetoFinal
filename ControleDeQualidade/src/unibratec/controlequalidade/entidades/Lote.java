@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +22,7 @@ public class Lote {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID_LOTE")
 	private long idLote;
 
 	@Column(name = "NOME_LOTE", nullable = false)
@@ -31,15 +34,16 @@ public class Lote {
 
 	@Column(name = "QTD_PRODUTOS_LOTE", nullable = true)
 	private int qtdProdutos;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "ESTADO_LOTE")
+	private EstadoLoteEnum estadoLote;
 
+	@SuppressWarnings("static-access")
 	public Lote() {
 		this.setNomeLote();
+		this.setEstadoLote(estadoLote.ABERTO);
 	}
-
-//	public Lote(Calendar dataDeValidade) {
-//		this.setNomeLote();
-//		this.setDataDeValidade(dataDeValidade);
-//	}
 
 	public String getNomeLote() {
 		return nomeLote;
@@ -66,15 +70,21 @@ public class Lote {
 		this.qtdProdutos = qtdProdutos;
 	}
 
+	public EstadoLoteEnum getEstadoLote() {
+		return estadoLote;
+	}
+
+	public void setEstadoLote(EstadoLoteEnum estadoLote) {
+		this.estadoLote = estadoLote;
+	}
+
 	//Método que gera o nome do lote.
 	@SuppressWarnings("static-access")
 	private String geraNomeLote(){
 		String nomeLote = null;
-		Date d = new Date();
 		Calendar c = Calendar.getInstance();
-		c.setTime(d);
 		nomeLote = "LT" + c.get(c.YEAR) +  getNomeMesDeInt(c.get(c.MONTH)) + c.get(c.DAY_OF_MONTH) + 
-				"-" + "T" + c.get(c.HOUR) + c.get(c.MINUTE) +  String.valueOf(c.getTimeInMillis()).substring(8);
+				"-" + "T" +  String.valueOf(c.getTimeInMillis()).substring(7);
 		return nomeLote; 		
 	}
 

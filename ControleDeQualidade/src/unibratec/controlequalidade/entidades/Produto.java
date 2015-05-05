@@ -17,6 +17,7 @@ public class Produto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID_PRODUTO")
 	private long idProduto;
 
 	@Column(name = "NOME_PRODUTO", nullable = false)
@@ -26,17 +27,18 @@ public class Produto {
 	private String fabricanteProduto;
 
 	@ManyToOne
-	@JoinColumn(name = "idCategoria")
+	@JoinColumn(name = "ID_CATEGORIA")
 	private Categoria categoriaProduto;
 
 	@Column(name = "PRECO_PRODUTO", nullable = false)
 	private double precoProduto;
 
 	@ManyToOne
-	@JoinColumn(name = "idLote")
+	@JoinColumn(name = "ID_LOTE")
 	private Lote loteProduto;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "ESTADO_PRODUTO")
 	private EstadoProdutoEnum estadoProduto;
 
 	public Produto() {

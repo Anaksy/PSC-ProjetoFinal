@@ -1,39 +1,45 @@
 package unibratec.controlequalidade.negocio;
 
 import javax.persistence.EntityManager;
-
 import unibratec.controlequalidade.dao.DAOLote;
 import unibratec.controlequalidade.dao.IDAOLote;
 import unibratec.controlequalidade.entidades.Lote;
-import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
+import unibratec.controlequalidade.exceptions.ContateOAdministradorException;
+import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 
 public class NegocioLote {
-	
+
 	private IDAOLote daoLote;
 
 	public NegocioLote(EntityManager em) {
 		this.daoLote = new DAOLote(em);
 	}
 
-	public void gerarLote(Lote lote) { 
+	// Método que gera um lote e verifica se nome gerado já existe no sistema.
+	// O nome do lote é criado automaticamente através do método geraNomeLote(),
+	// que garante um nome único, porém caso mesmo assim um mesmo nome já se
+	// encontre cadastrado na base de dados, uma exceção será levantada.
+
+	public void gerarLote(Lote lote) throws ContateOAdministradorException {
 
 		try {
-
 			if (daoLote.consultarLoteExistente(lote.getNomeLote()) == true) {
-				
-				throw new CategoriaCadastradaException("Lote já cadastrada no sistema.");
-			
+	
+				throw new LoteCadastradoException("Lote já cadastrada no sistema.");
+
 			} else {
-				
 				daoLote.inserir(lote);
 			}
-			
-		} catch (CategoriaCadastradaException e) {
 
+		} catch (LoteCadastradoException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-
+			lote.setNomeLote();
+			System.out.println("Alterando nome do lote para inserção na base de dados.");
 		}
 	}
 
+
 }
+
+
