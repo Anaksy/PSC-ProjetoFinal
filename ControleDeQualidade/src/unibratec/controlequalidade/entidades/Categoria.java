@@ -23,7 +23,7 @@ public class Categoria {
 	private String nomeCategoria;
 	
 	@Column(name = "N_DIAS_PARA_VENCIMENTO_CATEGORIA", nullable = false)
-	private int numeroDeDiasParaVencimento;
+	private long numeroDeDiasParaVencimento;
 
 	public Categoria() {
 	}
@@ -41,7 +41,7 @@ public class Categoria {
 		this.nomeCategoria = nomeCategoria;
 	}
 
-	public int getNumeroDeDiasParaVencimento() {
+	public long getNumeroDeDiasParaVencimento() {
 		return numeroDeDiasParaVencimento;
 	}
 
@@ -78,8 +78,8 @@ public class Categoria {
 	@Override
 	public String toString() {
 		return "Categoria: " + (this.getNomeCategoria())
-				+ ", Número de dias para o vencimento: "
-				+ (this.getNumeroDeDiasParaVencimento()) + ".";
+				+ "\nNúmero de dias para o vencimento: "
+				+ (this.getNumeroDeDiasParaVencimento());
 	}
 
 }

@@ -9,10 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Table(name = "TB_PRODUTO")
 @Entity
+@Table(name = "TB_PRODUTO")
+@NamedQuery(name = "Produto.findByEstado", query = "Select p from Produto p where p.estadoProduto like :estadoProduto")
 public class Produto {
 
 	@Id
@@ -81,8 +83,8 @@ public class Produto {
 		this.fabricanteProduto = fabricanteProduto;
 	}
 
-	public String getCategoriaProduto() {
-		return categoriaProduto.getNomeCategoria();
+	public Categoria getCategoriaProduto() {
+		return categoriaProduto;
 	}
 
 	public void setCategoriaProduto(Categoria categoriaProduto) {
@@ -97,8 +99,8 @@ public class Produto {
 		this.precoProduto = precoProduto;
 	}
 
-	public String getLoteProduto() {
-		return loteProduto.getNomeLote();
+	public Lote getLoteProduto() {
+		return loteProduto;
 	}
 
 	public void setLoteProduto(Lote loteProduto) {
@@ -150,10 +152,11 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto: " + (this.getNomeProduto()) + ", Marca: "
-				+ (this.getFabricanteProduto()) + ", Categoria: "
-				+ (this.getCategoriaProduto()) + ", Preço: " + (this.getPrecoProduto())
-				+ ", Lote: " + (this.getLoteProduto()) + "Situação: "
-				+ (this.getEstadoProduto() + ".");
+		return "Produto: " + (this.getNomeProduto()) + 
+				"\nMarca: "	+ (this.getFabricanteProduto()) + 
+				"\n" + (this.getCategoriaProduto()) + 
+				"\nPreço: " + (this.getPrecoProduto()) + 
+				"\n" + (this.getLoteProduto()) + 
+				"\nSituação: "	+ (this.getEstadoProduto());
 	}
 }

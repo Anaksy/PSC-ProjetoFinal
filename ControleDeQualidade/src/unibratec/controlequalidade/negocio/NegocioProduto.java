@@ -17,4 +17,5 @@ public class NegocioProduto {
 	public void inserirProduto(Produto p){
 		this.daoProduto.inserir(p);
 	}
+
 }

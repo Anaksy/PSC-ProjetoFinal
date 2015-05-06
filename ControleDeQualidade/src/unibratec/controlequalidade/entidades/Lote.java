@@ -1,7 +1,9 @@
 package unibratec.controlequalidade.entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,7 +36,7 @@ public class Lote {
 
 	@Column(name = "QTD_PRODUTOS_LOTE", nullable = true)
 	private int qtdProdutos;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ESTADO_LOTE")
 	private EstadoLoteEnum estadoLote;
@@ -124,8 +126,11 @@ public class Lote {
 	@Override
 	public String toString() {
 
-		return "Nome do Lote: " + (this.getNomeLote()) + ", Data de validade: "
-				+ (this.getDataDeValidade() + ".");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String dataFormatada = sdf.format(this.getDataDeValidade().getTime());
+
+		return "Nome do Lote: " + (this.getNomeLote()) + "\nData de validade: "
+		+ dataFormatada;
 	}
 
 }
