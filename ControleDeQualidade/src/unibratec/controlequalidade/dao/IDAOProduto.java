@@ -12,5 +12,4 @@ public interface IDAOProduto extends IDAOGenerico<Produto> {
 
 	public Produto pesquisarProdutoPorEstado(Produto produto) throws ProdutoNaoEncontradoExcecption;
 
-
 }

@@ -12,6 +12,7 @@ import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.exceptions.ProdutoNaoPrestesAVencerException;
+import unibratec.controlequalidade.util.Funcoes;
 
 public class NegocioVenda {
 
@@ -32,7 +33,7 @@ public class NegocioVenda {
 				
 		for (Produto p : produtosList) {
 
-			if ((subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) <= p.getCategoriaProduto().getNumeroDeDiasParaVencimento())) {
+			if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) <= p.getCategoriaProduto().getNumeroDeDiasParaVencimento())) {
 				
 				produtosPrestesAVencerList.add(p);
 			}
@@ -48,7 +49,7 @@ public class NegocioVenda {
 				
 		Calendar dataAtual = Calendar.getInstance();
 				
-		if ((subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) <= p.getCategoriaProduto().getNumeroDeDiasParaVencimento())) {
+		if ((Funcoes.subtrairDiasDataCalendar(dataAtual, p.getLoteProduto().getDataDeValidade()) <= p.getCategoriaProduto().getNumeroDeDiasParaVencimento())) {
 				
 				return p;
 				
@@ -65,19 +66,6 @@ public class NegocioVenda {
 		produto.setPrecoProduto(produto.getPrecoProduto() - desconto);
 		
 		daoProduto.alterar(produto);
-	}
-
-	// Método que retorna o resultado da subtração de duas datas
-	private long subtrairDiasDataCalendar(Calendar primeiraDataCalendar, Calendar seundaDataCalendar){
-
-		Date primeiraDataDate = primeiraDataCalendar.getTime();     
-		Date segundaDataDate = seundaDataCalendar.getTime();     
-		
-		long resultado = segundaDataDate.getTime() - primeiraDataDate.getTime();     
-		
-		System.out.println("Diferenca em dias: " + (resultado/1000/60/60/24));     
-
-		return resultado/1000/60/60/24;
 	}
 
 }
