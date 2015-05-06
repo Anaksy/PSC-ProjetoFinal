@@ -45,14 +45,14 @@ public class Produto {
 	}
 
 	public Produto(String nome, String fabricante, Categoria categoria,
-			double preco, Lote lote, EstadoProdutoEnum situacao) {
+			double preco, Lote lote) {
 
 		this.setNomeProduto(nome);
 		this.setFabricanteProduto(fabricante);
 		this.setCategoriaProduto(categoria);
 		this.setPrecoProduto(preco);
 		this.setLoteProduto(lote);
-		this.setEstadoProduto(situacao);
+		this.setEstadoProduto(EstadoProdutoEnum.EM_ESTOQUE);
 	}
 
 	public String getNomeProduto() {
