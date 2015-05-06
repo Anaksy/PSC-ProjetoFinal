@@ -8,5 +8,7 @@ public class DAOProduto extends DAOGenerico<Produto> implements IDAOProduto {
 	public DAOProduto(EntityManager em) {
 		super(em);
 	}
+	
+	
 
 }

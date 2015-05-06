@@ -44,14 +44,24 @@ public class Produto {
 	public Produto() {
 	}
 
+//	public Produto(String nome, String fabricante, Categoria categoria,
+//			double preco, Lote lote) {
+//
+//		this.setNomeProduto(nome);
+//		this.setFabricanteProduto(fabricante);
+//		this.setCategoriaProduto(categoria);
+//		this.setPrecoProduto(preco);
+//		this.setLoteProduto(lote);
+//		this.setEstadoProduto(EstadoProdutoEnum.EM_ESTOQUE);
+//	}
+	
 	public Produto(String nome, String fabricante, Categoria categoria,
-			double preco, Lote lote) {
+			double preco) {
 
 		this.setNomeProduto(nome);
 		this.setFabricanteProduto(fabricante);
 		this.setCategoriaProduto(categoria);
 		this.setPrecoProduto(preco);
-		this.setLoteProduto(lote);
 		this.setEstadoProduto(EstadoProdutoEnum.EM_ESTOQUE);
 	}
 

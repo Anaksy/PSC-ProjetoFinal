@@ -16,6 +16,8 @@ import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.ContateOAdministradorException;
 import unibratec.controlequalidade.negocio.NegocioCategoria;
 import unibratec.controlequalidade.negocio.NegocioLote;
+import unibratec.controlequalidade.negocio.NegocioProduto;
+import unibratec.controlequalidade.negocio.NegocioProdutoLote;
 
 public class TesteControleDeQualidade {
 
@@ -25,39 +27,32 @@ public class TesteControleDeQualidade {
 		EntityManager etManager = emf.createEntityManager(); 
 		//############# ENTITY MANAGER #############
 
-		//############# CATEGORIA #############
-//		Categoria c0 = new Categoria("teste", 15);
-//		System.out.println(c0);
-//
-//		NegocioCategoria negocioCategoria = new NegocioCategoria(etManager);
-//		negocioCategoria.inserirCategoria(c0);
-//		DAOCategoria daoCategoria= new DAOCategoria(etManager);
-//		daoCategoria.inserir(c0);
-//		//############# CATEGORIA #############
-//
-//		//############# LOTE #############
-//		Calendar cl0 = Calendar.getInstance();
-//		cl0.set(2018, 12, 10);
+		//Simulando o comboBox de categoria previamente definidas
+		Categoria c0 = new Categoria("Cosmetico", 30);
+		NegocioCategoria negocioCategoria = new NegocioCategoria(etManager);
+		negocioCategoria.inserirCategoria(c0);
+		
+		//Simulando o campo de data de validade
+		Calendar cl0 = Calendar.getInstance();
+		cl0.set(2020, 12, 10);
+		
+		//Simulando campo de quantidade de produtos
+		int qtdProdutos = 200;
+				
 		Lote l0 = new Lote();
-//		System.out.println(l0);
-//
+		Produto p0 = new Produto("Macarrão", "Pilar", c0, 1.50);
+		
+		NegocioProdutoLote npl = new NegocioProdutoLote();
+		npl.associaLoteProduto(l0, p0, cl0, qtdProdutos);
+		
+		//Inserindo lote ja associado ao produto
 		NegocioLote negocioLote = new NegocioLote(etManager);
 		negocioLote.gerarLote(l0);
-//		DAOLote daoLote = new DAOLote(etManager);
-//		daoLote.inserir(l0);
-		//############# LOTE #############
-//
-//		//############# PRODUTO #############
-//		Produto p0 = new Produto("Toddynho", "Pepsico", c0, 1.50, l0, EstadoProdutoEnum.EM_ESTOQUE);
-//		System.out.println(p0);
-
-//		DAOProduto daoProduto = new DAOProduto(etManager);
-//		daoProduto.inserir(p0);
-//		//############# PRODUTO #############
 		
+		//Inserindo produto ja associado ao lote
+		NegocioProduto np = new NegocioProduto(etManager);
+		np.inserirProduto(p0);
 		
-		
-
 	}
 
 }
