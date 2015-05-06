@@ -23,16 +23,18 @@ public class NegocioLote {
 	public void gerarLote(Lote lote) {
 
 		try {
-			daoLote.consultarLoteExistente(lote.getNomeLote()); 
-			daoLote.inserir(lote);
+			this.daoLote.consultarLoteExistente(lote.getNomeLote()); 
+			this.daoLote.inserir(lote);
 
 		} 
 		catch (LoteCadastradoException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
+			
 			lote.setNomeLote();
+			
 			System.out.println("Alterando nome do lote para inserção na base de dados.");
-			daoLote.inserir(lote);
+			this.daoLote.inserir(lote);
 		}
 	}
 

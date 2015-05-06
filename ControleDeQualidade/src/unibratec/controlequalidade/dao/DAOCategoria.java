@@ -31,7 +31,7 @@ IDAOCategoria {
 
 		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME, this.classePersistente);
 
-		query.setParameter("nome", "%" + nomeCategoria + "%");
+		query.setParameter("nomeCategoria", "%" + nomeCategoria + "%");
 
 		try {
 

@@ -19,9 +19,9 @@ public class NegocioCategoria {
 
 		try {
 
-			daoCategoria.consultaExisteCategoria(categoria.getNomeCategoria());
+			this.daoCategoria.consultaExisteCategoria(categoria.getNomeCategoria());
 
-			daoCategoria.inserir(categoria);
+			this.daoCategoria.inserir(categoria);
 
 		} catch (CategoriaCadastradaException e) {
 

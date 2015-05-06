@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_CATEGORIA")
-@NamedQuery(name="Categoria.findByNome", query="Select c from Categoria c where c.nomeCategoria like :nome")
+@NamedQuery(name="Categoria.findByNome", query="Select c from Categoria c where c.nomeCategoria like :nomeCategoria")
 
 public class Categoria {
 
