@@ -19,10 +19,10 @@ public class Categoria {
 	@Column(name = "ID_CATEGORIA")
 	private long idCategoria;
 	
-	@Column(name = "NOME_CATEGORIA")
+	@Column(name = "NOME_CATEGORIA", nullable = false)
 	private String nomeCategoria;
 	
-	@Column(name = "N_DIAS_PARA_VENCIMENTO_CATEGORIA")
+	@Column(name = "N_DIAS_PARA_VENCIMENTO_CATEGORIA", nullable = false)
 	private int numeroDeDiasParaVencimento;
 
 	public Categoria() {
