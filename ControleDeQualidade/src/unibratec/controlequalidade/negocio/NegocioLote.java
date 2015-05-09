@@ -1,11 +1,13 @@
 package unibratec.controlequalidade.negocio;
 
 import javax.persistence.EntityManager;
+
 import unibratec.controlequalidade.dao.DAOLote;
 import unibratec.controlequalidade.dao.IDAOLote;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.exceptions.ContateOAdministradorException;
 import unibratec.controlequalidade.exceptions.LoteCadastradoException;
+import unibratec.controlequalidade.util.Funcoes;
 
 public class NegocioLote {
 
@@ -23,6 +25,7 @@ public class NegocioLote {
 	public void gerarLote(Lote lote) {
 
 		try {
+			
 			this.daoLote.consultarLoteExistente(lote.getNomeLote()); 
 			this.daoLote.inserir(lote);
 
@@ -31,7 +34,7 @@ public class NegocioLote {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 			
-			lote.setNomeLote();
+			lote.setNomeLote(Funcoes.geraNomeLote());
 			
 			System.out.println("Alterando nome do lote para inserção na base de dados.");
 			this.daoLote.inserir(lote);

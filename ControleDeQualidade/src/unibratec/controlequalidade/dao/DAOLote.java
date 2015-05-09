@@ -16,7 +16,6 @@ public class DAOLote extends DAOGenerico<Lote> implements IDAOLote {
 		super(em);
 	}
 
-
 	/**
 	 * Verifica a existencia de um lote no banco de dados
 	 * 

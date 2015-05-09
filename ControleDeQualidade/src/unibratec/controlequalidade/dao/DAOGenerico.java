@@ -142,7 +142,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 	public List<Entidade> consultarTodos() {
 		try {
 			String sql = "from " + classePersistente.getSimpleName();
-			TypedQuery<Entidade> query = entityManager.createQuery(sql, classePersistente);
+			TypedQuery<Entidade> query = getEntityManager().createQuery(sql, classePersistente); // MUDEI AQUI
 			return query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -154,7 +154,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 			Integer quantidade) {
 		try {
 			String sql = "from " + classePersistente.getSimpleName();
-			TypedQuery<Entidade> query = entityManager.createQuery(sql, classePersistente);
+			TypedQuery<Entidade> query = getEntityManager().createQuery(sql, classePersistente); // MUDEI AQUI
 			query = query.setFirstResult(indiceInicial).setMaxResults(quantidade);
 			return query.getResultList();
 		} catch (Exception e) {

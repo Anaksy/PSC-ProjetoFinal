@@ -43,19 +43,7 @@ public class Produto {
 	@Column(name = "ESTADO_PRODUTO")
 	private EstadoProdutoEnum estadoProduto;
 
-	public Produto() {
-	}
-
-//	public Produto(String nome, String fabricante, Categoria categoria,
-//			double preco, Lote lote) {
-//
-//		this.setNomeProduto(nome);
-//		this.setFabricanteProduto(fabricante);
-//		this.setCategoriaProduto(categoria);
-//		this.setPrecoProduto(preco);
-//		this.setLoteProduto(lote);
-//		this.setEstadoProduto(EstadoProdutoEnum.EM_ESTOQUE);
-//	}
+	public Produto(){}
 	
 	public Produto(String nome, String fabricante, Categoria categoria,
 			double preco) {
@@ -65,6 +53,14 @@ public class Produto {
 		this.setCategoriaProduto(categoria);
 		this.setPrecoProduto(preco);
 		this.setEstadoProduto(EstadoProdutoEnum.EM_ESTOQUE);
+	}
+
+	public long getIdProduto() {
+		return idProduto;
+	}
+
+	public void setIdProduto(long idProduto) {
+		this.idProduto = idProduto;
 	}
 
 	public String getNomeProduto() {

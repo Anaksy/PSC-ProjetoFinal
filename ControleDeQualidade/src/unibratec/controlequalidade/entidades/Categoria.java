@@ -25,12 +25,19 @@ public class Categoria {
 	@Column(name = "N_DIAS_PARA_VENCIMENTO_CATEGORIA", nullable = false)
 	private long numeroDeDiasParaVencimento;
 
-	public Categoria() {
-	}
-
+	public Categoria() {}
+	
 	public Categoria(String nomeCategoria, int numeroDeDiasParaVencimento) {
 		this.setNomeCategoria(nomeCategoria);
 		this.setNumeroDeDiasParaVencimento(numeroDeDiasParaVencimento);
+	}
+
+	public long getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(long idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 
 	public String getNomeCategoria() {
@@ -44,8 +51,8 @@ public class Categoria {
 	public long getNumeroDeDiasParaVencimento() {
 		return numeroDeDiasParaVencimento;
 	}
-
-	public void setNumeroDeDiasParaVencimento(int numeroDeDiasParaVencimento) {
+	
+	public void setNumeroDeDiasParaVencimento(long numeroDeDiasParaVencimento) {
 		this.numeroDeDiasParaVencimento = numeroDeDiasParaVencimento;
 	}
 

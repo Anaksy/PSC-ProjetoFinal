@@ -2,7 +2,6 @@ package unibratec.controlequalidade.entidades;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import unibratec.controlequalidade.util.Funcoes;
 
 @Table(name = "TB_LOTE")
 @Entity
@@ -41,18 +42,29 @@ public class Lote {
 	@Column(name = "ESTADO_LOTE")
 	private EstadoLoteEnum estadoLote;
 
-	@SuppressWarnings("static-access")
-	public Lote() {
-		this.setNomeLote();
-		this.setEstadoLote(estadoLote.ABERTO);
+	public Lote() {}
+	
+	public Lote(Calendar dataDeValidade, int qtdProdutos) {
+		this.setNomeLote(Funcoes.geraNomeLote());
+		this.setDataDeValidade(dataDeValidade);
+		this.setQtdProdutos(qtdProdutos);
+		this.setEstadoLote(EstadoLoteEnum.ABERTO);
+	}
+
+	public long getIdLote() {
+		return idLote;
+	}
+
+	public void setIdLote(long idLote) {
+		this.idLote = idLote;
 	}
 
 	public String getNomeLote() {
 		return nomeLote;
 	}
 
-	public void setNomeLote() {
-		this.nomeLote = geraNomeLote();
+	public void setNomeLote(String nomeLote) {
+		this.nomeLote = nomeLote;
 	}
 
 	public Calendar getDataDeValidade() {
@@ -79,23 +91,6 @@ public class Lote {
 	public void setEstadoLote(EstadoLoteEnum estadoLote) {
 		this.estadoLote = estadoLote;
 	}
-
-	//Método que gera o nome do lote.
-	@SuppressWarnings("static-access")
-	private String geraNomeLote(){
-		String nomeLote = null;
-		Calendar c = Calendar.getInstance();
-		nomeLote = "LT" + c.get(c.YEAR) +  getNomeMesDeInt(c.get(c.MONTH)) + c.get(c.DAY_OF_MONTH) + 
-				"-" + "T" +  String.valueOf(c.getTimeInMillis()).substring(7);
-		return nomeLote; 		
-	}
-
-	//Método que "traduz" o número do mês na abreviação do mesmo.
-	private String getNomeMesDeInt(int mes){
-		String[] meses = {"JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEC"};
-		return meses[mes];
-	}
-
 
 	@Override
 	public int hashCode() {

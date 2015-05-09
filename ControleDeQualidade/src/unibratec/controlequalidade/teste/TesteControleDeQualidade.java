@@ -1,6 +1,8 @@
 package unibratec.controlequalidade.teste;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +15,8 @@ import unibratec.controlequalidade.entidades.Categoria;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
+import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
+import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.ContateOAdministradorException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
@@ -25,13 +29,13 @@ import unibratec.controlequalidade.negocio.NegocioVenda;
 public class TesteControleDeQualidade {
 
 	public static void main(String[] args) {
-		//############# ENTITY MANAGER ############# 
+		/*//############# ENTITY MANAGER ############# 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleDeQualidadePSC");
 		EntityManager etManager = emf.createEntityManager(); 
 		//############# ENTITY MANAGER #############
 
-   //============================================================================================		
-/*		//Simulando o comboBox de categoria previamente definidas
+		//============================================================================================		
+		//Simulando o comboBox de categoria previamente definidas
 		Categoria c0 = new Categoria("teste1", 30);
 		NegocioCategoria negocioCategoria = new NegocioCategoria(etManager);
 		negocioCategoria.inserirCategoria(c0);
@@ -49,7 +53,7 @@ public class TesteControleDeQualidade {
 		NegocioProdutoLote npl = new NegocioProdutoLote();
 		try {
 			npl.associaLoteProduto(l0, p0, cl0, qtdProdutos);
-			
+
 			//Inserindo lote ja associado ao produto
 			NegocioLote negocioLote = new NegocioLote(etManager);
 			negocioLote.gerarLote(l0);
@@ -57,7 +61,7 @@ public class TesteControleDeQualidade {
 			//Inserindo produto ja associado ao lote
 			NegocioProduto np = new NegocioProduto(etManager);
 			np.inserirProduto(p0);
-			
+
 		} catch (dataDeValidadeMenorPermitidaCategoriaException e) {
 			e.printStackTrace();
 			e.getMessage();
@@ -65,42 +69,96 @@ public class TesteControleDeQualidade {
 
 
 
-	//============================================================================================
-//
-//		//Teste de retorno da lista de produtos prestes a vencer
-//		
-//		NegocioVenda nv = new NegocioVenda(etManager);
-//		
-//		try {
-//			
-//			for (Produto p : nv.retornaListaProdutosPrestesAVencer()) {
-//				
-//				System.out.println(p.toString());
-//			}
-//		} catch (ProdutoNaoEncontradoExcecption e) {
-//			e.printStackTrace();
-//			e.getMessage();
-//			
-//		}
-			
-	//============================================================================================	
-		
-	//============================================================================================	
-				
-//		DAOProduto daoProduto = new DAOProduto(etManager);
-//		NegocioVenda nv = new NegocioVenda(etManager);
-//		
-//		Long idProduto = new Long(1);
-//		Long desconto = new Long(1);
-//		System.out.println(daoProduto.consultarPorId(idProduto));
-//		nv.darDescontoProdutoPrestesAVencer(daoProduto.consultarPorId(idProduto), desconto);
-		
-		
-	//============================================================================================
-			
-		
-		
+		//============================================================================================
+		//
+		//		//Teste de retorno da lista de produtos prestes a vencer
+		//		
+		//		NegocioVenda nv = new NegocioVenda(etManager);
+		//		
+		//		try {
+		//			
+		//			for (Produto p : nv.retornaListaProdutosPrestesAVencer()) {
+		//				
+		//				System.out.println(p.toString());
+		//			}
+		//		} catch (ProdutoNaoEncontradoExcecption e) {
+		//			e.printStackTrace();
+		//			e.getMessage();
+		//			
+		//		}
 
+		//============================================================================================	
+
+		//============================================================================================	
+
+		//		DAOProduto daoProduto = new DAOProduto(etManager);
+		//		NegocioVenda nv = new NegocioVenda(etManager);
+		//		
+		//		Long idProduto = new Long(1);
+		//		Long desconto = new Long(1);
+		//		System.out.println(daoProduto.consultarPorId(idProduto));
+		//		nv.darDescontoProdutoPrestesAVencer(daoProduto.consultarPorId(idProduto), desconto);
+
+
+		//============================================================================================
+
+		//Simulando o comboBox de categoria previamente definidas
+		Categoria c1 = new Categoria("teste1", 30);
+		Categoria c2 = new Categoria("teste2", 50);
+		Categoria c3 = new Categoria("teste3", 20);
+		NegocioCategoria ngCategoria = new NegocioCategoria();
+
+/*		
+		// INSERINDO UMA CATEGORIA
+		try {
+			ngCategoria.inserirCategoria(c0);
+		} catch (CategoriaCadastradaException e) {
+			System.out.println(e.getMessage());
+		}
+
+		
+		// LISTANDO TODAS AS CATEGORIAS
+		List<Categoria> listaCategorias = new ArrayList<Categoria>();
+		
+		listaCategorias = ngCategoria.listaTodasCategorias();
+		
+		for (Categoria categoria : listaCategorias) {
+			System.out.println(categoria);
+		}
+		
+		// BUSCANDO CATEGORIA POR NOME
+		try {
+			ngCategoria.buscaCategoriaPorNomeCategoria(c1.getNomeCategoria());
+		} catch (CategoriaNaoCadastradaException e) {
+			System.out.println(e.getMessage());
+		}
+
+		// BUSCANDO CATEGORIA POR ID
+		try {
+			System.out.println(ngCategoria.buscaCategoriaPorId(1));
+		} catch (CategoriaNaoCadastradaException e) {
+			System.out.println(e.getMessage());
+		}
+
+		// ALTERANDO CATEGORIA COMPLETA
+		try {
+			ngCategoria.alteraCategoria(c3, "teste3", 20);
+		
+		} catch (CategoriaNaoCadastradaException e) {
+		
+			System.out.println(e.getMessage());
+		
+		} catch (CategoriaCadastradaException e) {
+			
+			System.out.println(e.getMessage());
+		}
+
+		// REMOVENDO CATEGORIA
+		try {
+			ngCategoria.removeCategoria(c3);
+		} catch (CategoriaNaoCadastradaException e) {
+			System.out.println(e.getMessage());
+		}
+*/
 	}
-
 }

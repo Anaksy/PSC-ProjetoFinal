@@ -1,11 +1,15 @@
 package unibratec.controlequalidade.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import unibratec.controlequalidade.entidades.Categoria;
-import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
+import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
+import unibratec.controlequalidade.entidades.Produto;
+import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 
 public class DAOCategoria extends DAOGenerico<Categoria> implements
 IDAOCategoria {
@@ -17,109 +21,73 @@ IDAOCategoria {
 	}
 
 	/**
-	 * Verifica a existencia de uma categoria no banco de dados
+	 * Método para verificar a existência de uma categoria no banco de dados
 	 * 
-	 * @param Nome
-	 *            da Categoria
+	 * @param Categoria
 	 * 
 	 * @return true/false
 	 */
-
-
-	@Override 
-	public void consultaExisteCategoria(String nomeCategoria) throws CategoriaCadastradaException {
+	@Override
+	public boolean existeCategoria(Categoria categoria) {
 
 		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME, this.classePersistente);
 
-		query.setParameter("nomeCategoria", "%" + nomeCategoria + "%");
+		query.setParameter("nomeCategoria", categoria.getNomeCategoria());
 
 		try {
 
-			query.setMaxResults(1).getSingleResult();
+			Categoria cat = query.setMaxResults(1).getSingleResult();
 
-			throw new CategoriaCadastradaException("Categoria já cadastrada no sistema.");
+			System.out.println(cat); // APAGAR DEPOIS
+
+			if (!cat.equals(null)) {
+				System.out.println("Retorno da base diferente de nulo!"); // APAGAR DEPOIS
+				return true;
+			}
+
+		} catch (NoResultException e) {
+			
+			System.out.println("Retorno nulo da base! - NoResultException"); // APAGAR DEPOIS
+			return false;
+		}
+		
+		System.out.println("Retorno nulo da base!"); // APAGAR DEPOIS
+		return false;
+	}
+	
+	
+	/**
+	 * Método para buscar uma categoria pelo nome.
+	 * 
+	 * @param nomeCategoria
+	 * 
+	 * @return Categoria
+	 */
+	@Override
+	public Categoria buscaCategoria(String nomeCategoria) {
+
+		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(NAMED_QUERY_BYNOME, this.classePersistente);
+
+		query.setParameter("nomeCategoria", nomeCategoria);
+
+		try {
+
+			Categoria cat = query.setMaxResults(1).getSingleResult();
+
+			System.out.println(cat); // APAGAR DEPOIS
+
+			if (!cat.equals(null)) {
+				System.out.println("Retorno da base diferente de nulo!"); // APAGAR DEPOIS
+				return cat;
+			}
 
 		} catch (NoResultException e) {
 
-			e.printStackTrace();
-			e.getMessage();
-
+			System.out.println("Retorno nulo da base! - NoResultException"); // APAGAR DEPOIS
+			return null;
 		}
-
+		
+		return null;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//	@Override
-	//	public boolean consultarCategoriaExistente(String nome) {
-	//
-	//		TypedQuery<Categoria> query = this.entityManager.createNamedQuery(
-	//				NAMED_QUERY_BYNOME, this.classePersistente);
-	//		query.setParameter("nome", "%" + nome + "%");
-	//
-	//		try {
-	//			if (!query.setMaxResults(1).getSingleResult().equals(null)) {
-	//
-	//				return true;
-	//			}
-	//			
-	//		} catch (NoResultException e) {
-	//			e.printStackTrace();
-	//			e.getMessage();
-	//			
-	//			return false;
-	//			//throw new NoResultException(e.getMessage());
-	//		}
-	//
-	//		return false;
-	//	}
-
-	public void excluir(String nome) {
-
-		//		    EntityManager entityManager = getEntityManager();
-		//
-		//		    try {
-		//
-		//		      // Inicia uma transação com o banco de dados.
-		//
-		//		      entityManager.getTransaction().begin();
-		//
-		//		      // Consulta a pessoa na base de dados através do seu ID.
-		//
-		//		      Categoria ct = entityManager.find(Categoria.class, id);
-		//
-		//		      //System.out.println("Excluindo os dados de: " + ct.get);
-		//
-		//		      // Remove a pessoa da base de dados.
-		//
-		//		      entityManager.remove(ct);
-		//
-		//		      // Finaliza a transação.
-		//
-		//		      entityManager.getTransaction().commit();
-		//
-		//		    } finally {
-		//
-		//		      entityManager.close();
-		//
-		//		    }
-
-	}
-
+	
 }
