@@ -2,11 +2,8 @@ package unibratec.controlequalidade.negocio;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
 import unibratec.controlequalidade.dao.DAOProduto;
 import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Produto;

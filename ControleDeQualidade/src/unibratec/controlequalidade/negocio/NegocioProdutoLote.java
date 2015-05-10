@@ -1,13 +1,7 @@
 package unibratec.controlequalidade.negocio;
 
 import java.util.Calendar;
-
-import javax.persistence.EntityManager;
-
-import unibratec.controlequalidade.dao.DAOProduto;
-import unibratec.controlequalidade.dao.IDAOProduto;
 import unibratec.controlequalidade.entidades.EstadoLoteEnum;
-import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
 import unibratec.controlequalidade.entidades.Lote;
 import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
