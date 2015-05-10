@@ -9,12 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_PRODUTO")
-@NamedQuery(name = "Produto.findByEstado", query = "Select p from Produto p where p.estadoProduto like :estadoProduto")
+@NamedQueries({
+	@NamedQuery(name = "Produto.findByEstado", query = "Select p from Produto p where p.estadoProduto like :estadoProduto"),
+	@NamedQuery(name = "Produto.findByLoteId", query = "Select p from Produto p where p.loteProduto.idLote = :idLoteProduto")
+})
 public class Produto {
 
 	@Id
@@ -44,7 +48,7 @@ public class Produto {
 	private EstadoProdutoEnum estadoProduto;
 
 	public Produto(){}
-	
+
 	public Produto(String nome, String fabricante, Categoria categoria,
 			double preco) {
 

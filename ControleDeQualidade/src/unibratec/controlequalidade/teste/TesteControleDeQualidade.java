@@ -18,6 +18,8 @@ import unibratec.controlequalidade.entidades.Produto;
 import unibratec.controlequalidade.exceptions.CategoriaCadastradaException;
 import unibratec.controlequalidade.exceptions.CategoriaNaoCadastradaException;
 import unibratec.controlequalidade.exceptions.ContateOAdministradorException;
+import unibratec.controlequalidade.exceptions.LoteCadastradoException;
+import unibratec.controlequalidade.exceptions.LoteNaoCadastradoException;
 import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 import unibratec.controlequalidade.exceptions.dataDeValidadeMenorPermitidaCategoriaException;
 import unibratec.controlequalidade.negocio.NegocioCategoria;
@@ -29,16 +31,21 @@ import unibratec.controlequalidade.negocio.NegocioVenda;
 public class TesteControleDeQualidade {
 
 	public static void main(String[] args) {
-		/*//############# ENTITY MANAGER ############# 
+/*		//############# ENTITY MANAGER ############# 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleDeQualidadePSC");
 		EntityManager etManager = emf.createEntityManager(); 
 		//############# ENTITY MANAGER #############
 
 		//============================================================================================		
 		//Simulando o comboBox de categoria previamente definidas
-		Categoria c0 = new Categoria("teste1", 30);
-		NegocioCategoria negocioCategoria = new NegocioCategoria(etManager);
-		negocioCategoria.inserirCategoria(c0);
+		Categoria c0 = new Categoria("Laticíneos", 30);
+		NegocioCategoria negocioCategoria = new NegocioCategoria();
+		try {
+			negocioCategoria.inserirCategoria(c0);
+		} catch (CategoriaCadastradaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		//Simulando o campo de data de validade
 		Calendar cl0 = Calendar.getInstance();
@@ -48,15 +55,15 @@ public class TesteControleDeQualidade {
 		int qtdProdutos = 200;
 
 		Lote l0 = new Lote();
-		Produto p0 = new Produto("Toddyinho", "Neslte", c0, 1.50);
+		Produto p0 = new Produto("Toddynho", "Pepisco", c0, 1.50);
 
 		NegocioProdutoLote npl = new NegocioProdutoLote();
 		try {
 			npl.associaLoteProduto(l0, p0, cl0, qtdProdutos);
 
 			//Inserindo lote ja associado ao produto
-			NegocioLote negocioLote = new NegocioLote(etManager);
-			negocioLote.gerarLote(l0);
+			NegocioLote negocioLote = new NegocioLote();
+			negocioLote.inserirLote(l0);
 
 			//Inserindo produto ja associado ao lote
 			NegocioProduto np = new NegocioProduto(etManager);
@@ -65,6 +72,30 @@ public class TesteControleDeQualidade {
 		} catch (dataDeValidadeMenorPermitidaCategoriaException e) {
 			e.printStackTrace();
 			e.getMessage();
+		} catch (LoteCadastradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		//=========== Alterando Lote
+/*		Lote l0 = new Lote();
+		l0.setNomeLote("LT2015MAI9-T068697x");
+		
+		Calendar cl0 = Calendar.getInstance();
+		cl0.set(2015, 4, 10);
+		
+		NegocioLote negocioLote = new NegocioLote();
+		try {
+			negocioLote.alteraLote(l0, cl0);
+		} catch (CategoriaNaoCadastradaException | LoteCadastradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LoteNaoCadastradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (dataDeValidadeMenorPermitidaCategoriaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}*/
 
 
@@ -101,14 +132,14 @@ public class TesteControleDeQualidade {
 
 
 		//============================================================================================
-
+		/*
 		//Simulando o comboBox de categoria previamente definidas
 		Categoria c1 = new Categoria("teste1", 30);
 		Categoria c2 = new Categoria("teste2", 50);
 		Categoria c3 = new Categoria("teste3", 20);
 		NegocioCategoria ngCategoria = new NegocioCategoria();
 
-/*		
+		
 		// INSERINDO UMA CATEGORIA
 		try {
 			ngCategoria.inserirCategoria(c0);
@@ -160,5 +191,6 @@ public class TesteControleDeQualidade {
 			System.out.println(e.getMessage());
 		}
 */
+		
 	}
 }

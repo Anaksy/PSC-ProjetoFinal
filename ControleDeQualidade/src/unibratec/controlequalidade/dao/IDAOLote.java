@@ -5,6 +5,10 @@ import unibratec.controlequalidade.exceptions.LoteCadastradoException;
 
 public interface IDAOLote extends IDAOGenerico<Lote> {
 	
-	public void consultarLoteExistente(String lote) throws LoteCadastradoException;
+	public boolean existeLote(Lote lote) throws LoteCadastradoException;
+
+	public Lote buscaLote(String nomeLote);
+	
+	public long pesquisaNDiasPVenderCategoriaDeLote(Lote lote);
 
 }
