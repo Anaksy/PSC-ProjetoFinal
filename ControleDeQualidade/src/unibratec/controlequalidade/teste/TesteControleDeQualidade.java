@@ -98,8 +98,6 @@ public class TesteControleDeQualidade {
 			e.printStackTrace();
 		}*/
 
-
-
 		//============================================================================================
 		//
 		//		//Teste de retorno da lista de produtos prestes a vencer

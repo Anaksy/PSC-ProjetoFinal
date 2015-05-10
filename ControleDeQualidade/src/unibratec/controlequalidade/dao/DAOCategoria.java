@@ -1,15 +1,9 @@
 package unibratec.controlequalidade.dao;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-
 import unibratec.controlequalidade.entidades.Categoria;
-import unibratec.controlequalidade.entidades.EstadoProdutoEnum;
-import unibratec.controlequalidade.entidades.Produto;
-import unibratec.controlequalidade.exceptions.ProdutoNaoEncontradoExcecption;
 
 public class DAOCategoria extends DAOGenerico<Categoria> implements
 IDAOCategoria {

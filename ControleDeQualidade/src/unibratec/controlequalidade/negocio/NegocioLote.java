@@ -1,7 +1,6 @@
 package unibratec.controlequalidade.negocio;
 
 import java.util.Calendar;
-
 import unibratec.controlequalidade.dao.DAOFactory;
 import unibratec.controlequalidade.dao.IDAOLote;
 import unibratec.controlequalidade.entidades.Lote;
@@ -50,13 +49,13 @@ public class NegocioLote {
 	 * @throws dataDeValidadeMenorPermitidaCategoriaException 
 	 */
 	public void alteraLote(Lote lote, Calendar novaDataLote) throws CategoriaNaoCadastradaException, LoteCadastradoException, LoteNaoCadastradoException, dataDeValidadeMenorPermitidaCategoriaException{
-		
+
 		Lote PesquisaLote = daoLote.buscaLote(lote.getNomeLote());
-		
+
 		if (PesquisaLote == null) {
 			throw new LoteNaoCadastradoException(MensagensExceptions.LOTE_NAO_CADASTRADA_EXCEPTION);
 		}
-				
+
 		Long nDiasCatgLote = daoLote.pesquisaNDiasPVenderCategoriaDeLote(PesquisaLote);
 
 		if (nDiasCatgLote == -1) {
@@ -69,8 +68,6 @@ public class NegocioLote {
 			throw new dataDeValidadeMenorPermitidaCategoriaException(MensagensExceptions.DATA_VALIDADE_MENOR_CATEGORIA_EXCEPTION);
 		}
 
-		
-
 		if (PesquisaLote != null) {
 
 			PesquisaLote.setDataDeValidade(novaDataLote);
@@ -78,9 +75,6 @@ public class NegocioLote {
 			daoLote.alterar(PesquisaLote);
 			System.out.println("Lote alterado com sucesso!");
 
-		} else {
-
-			throw new CategoriaNaoCadastradaException(MensagensExceptions.CATEGORIA_NAO_CADASTRADA_EXCEPTION);
 		}
 
 	}
